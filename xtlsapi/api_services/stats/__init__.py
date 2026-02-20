@@ -6,6 +6,7 @@ from .get_total_upload_traffic import GetTotalUploadTraffic
 from .get_total_download_traffic import GetTotalDownloadTraffic
 from .get_statsquery import StatsQuery
 from .get_statsonline import StatsOnline
+from .get_stats_online_ip_list import StatsOnlineIpList
 
 class StatsAPIService(
     GetClientUploadTraffic,
@@ -15,6 +16,7 @@ class StatsAPIService(
     GetTotalUploadTraffic,
     GetTotalDownloadTraffic,
     StatsQuery,
-    StatsOnline
+    StatsOnline,
+    StatsOnlineIpList
 ):
     pass

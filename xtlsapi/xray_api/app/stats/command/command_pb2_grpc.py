@@ -3,9 +3,9 @@
 import grpc
 import warnings
 
-from xtlsapi.xray_api.app.stats.command import command_pb2 as app_dot_stats_dot_command_dot_command__pb2
+from . import command_pb2 as command__pb2
 
-GRPC_GENERATED_VERSION = '1.67.1'
+GRPC_GENERATED_VERSION = '1.71.2'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -18,7 +18,7 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in app/stats/command/command_pb2_grpc.py depends on'
+        + f' but the generated code in command_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
@@ -36,23 +36,28 @@ class StatsServiceStub(object):
         """
         self.GetStats = channel.unary_unary(
                 '/xray.app.stats.command.StatsService/GetStats',
-                request_serializer=app_dot_stats_dot_command_dot_command__pb2.GetStatsRequest.SerializeToString,
-                response_deserializer=app_dot_stats_dot_command_dot_command__pb2.GetStatsResponse.FromString,
+                request_serializer=command__pb2.GetStatsRequest.SerializeToString,
+                response_deserializer=command__pb2.GetStatsResponse.FromString,
                 _registered_method=True)
         self.GetStatsOnline = channel.unary_unary(
                 '/xray.app.stats.command.StatsService/GetStatsOnline',
-                request_serializer=app_dot_stats_dot_command_dot_command__pb2.GetStatsRequest.SerializeToString,
-                response_deserializer=app_dot_stats_dot_command_dot_command__pb2.GetStatsResponse.FromString,
+                request_serializer=command__pb2.GetStatsRequest.SerializeToString,
+                response_deserializer=command__pb2.GetStatsResponse.FromString,
                 _registered_method=True)
         self.QueryStats = channel.unary_unary(
                 '/xray.app.stats.command.StatsService/QueryStats',
-                request_serializer=app_dot_stats_dot_command_dot_command__pb2.QueryStatsRequest.SerializeToString,
-                response_deserializer=app_dot_stats_dot_command_dot_command__pb2.QueryStatsResponse.FromString,
+                request_serializer=command__pb2.QueryStatsRequest.SerializeToString,
+                response_deserializer=command__pb2.QueryStatsResponse.FromString,
                 _registered_method=True)
         self.GetSysStats = channel.unary_unary(
                 '/xray.app.stats.command.StatsService/GetSysStats',
-                request_serializer=app_dot_stats_dot_command_dot_command__pb2.SysStatsRequest.SerializeToString,
-                response_deserializer=app_dot_stats_dot_command_dot_command__pb2.SysStatsResponse.FromString,
+                request_serializer=command__pb2.SysStatsRequest.SerializeToString,
+                response_deserializer=command__pb2.SysStatsResponse.FromString,
+                _registered_method=True)
+        self.GetStatsOnlineIpList = channel.unary_unary(
+                '/xray.app.stats.command.StatsService/GetStatsOnlineIpList',
+                request_serializer=command__pb2.GetStatsRequest.SerializeToString,
+                response_deserializer=command__pb2.GetStatsOnlineIpListResponse.FromString,
                 _registered_method=True)
 
 
@@ -83,28 +88,39 @@ class StatsServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetStatsOnlineIpList(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_StatsServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetStats': grpc.unary_unary_rpc_method_handler(
                     servicer.GetStats,
-                    request_deserializer=app_dot_stats_dot_command_dot_command__pb2.GetStatsRequest.FromString,
-                    response_serializer=app_dot_stats_dot_command_dot_command__pb2.GetStatsResponse.SerializeToString,
+                    request_deserializer=command__pb2.GetStatsRequest.FromString,
+                    response_serializer=command__pb2.GetStatsResponse.SerializeToString,
             ),
             'GetStatsOnline': grpc.unary_unary_rpc_method_handler(
                     servicer.GetStatsOnline,
-                    request_deserializer=app_dot_stats_dot_command_dot_command__pb2.GetStatsRequest.FromString,
-                    response_serializer=app_dot_stats_dot_command_dot_command__pb2.GetStatsResponse.SerializeToString,
+                    request_deserializer=command__pb2.GetStatsRequest.FromString,
+                    response_serializer=command__pb2.GetStatsResponse.SerializeToString,
             ),
             'QueryStats': grpc.unary_unary_rpc_method_handler(
                     servicer.QueryStats,
-                    request_deserializer=app_dot_stats_dot_command_dot_command__pb2.QueryStatsRequest.FromString,
-                    response_serializer=app_dot_stats_dot_command_dot_command__pb2.QueryStatsResponse.SerializeToString,
+                    request_deserializer=command__pb2.QueryStatsRequest.FromString,
+                    response_serializer=command__pb2.QueryStatsResponse.SerializeToString,
             ),
             'GetSysStats': grpc.unary_unary_rpc_method_handler(
                     servicer.GetSysStats,
-                    request_deserializer=app_dot_stats_dot_command_dot_command__pb2.SysStatsRequest.FromString,
-                    response_serializer=app_dot_stats_dot_command_dot_command__pb2.SysStatsResponse.SerializeToString,
+                    request_deserializer=command__pb2.SysStatsRequest.FromString,
+                    response_serializer=command__pb2.SysStatsResponse.SerializeToString,
+            ),
+            'GetStatsOnlineIpList': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetStatsOnlineIpList,
+                    request_deserializer=command__pb2.GetStatsRequest.FromString,
+                    response_serializer=command__pb2.GetStatsOnlineIpListResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -132,8 +148,8 @@ class StatsService(object):
             request,
             target,
             '/xray.app.stats.command.StatsService/GetStats',
-            app_dot_stats_dot_command_dot_command__pb2.GetStatsRequest.SerializeToString,
-            app_dot_stats_dot_command_dot_command__pb2.GetStatsResponse.FromString,
+            command__pb2.GetStatsRequest.SerializeToString,
+            command__pb2.GetStatsResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -159,8 +175,8 @@ class StatsService(object):
             request,
             target,
             '/xray.app.stats.command.StatsService/GetStatsOnline',
-            app_dot_stats_dot_command_dot_command__pb2.GetStatsRequest.SerializeToString,
-            app_dot_stats_dot_command_dot_command__pb2.GetStatsResponse.FromString,
+            command__pb2.GetStatsRequest.SerializeToString,
+            command__pb2.GetStatsResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -186,8 +202,8 @@ class StatsService(object):
             request,
             target,
             '/xray.app.stats.command.StatsService/QueryStats',
-            app_dot_stats_dot_command_dot_command__pb2.QueryStatsRequest.SerializeToString,
-            app_dot_stats_dot_command_dot_command__pb2.QueryStatsResponse.FromString,
+            command__pb2.QueryStatsRequest.SerializeToString,
+            command__pb2.QueryStatsResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -213,8 +229,35 @@ class StatsService(object):
             request,
             target,
             '/xray.app.stats.command.StatsService/GetSysStats',
-            app_dot_stats_dot_command_dot_command__pb2.SysStatsRequest.SerializeToString,
-            app_dot_stats_dot_command_dot_command__pb2.SysStatsResponse.FromString,
+            command__pb2.SysStatsRequest.SerializeToString,
+            command__pb2.SysStatsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetStatsOnlineIpList(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/xray.app.stats.command.StatsService/GetStatsOnlineIpList',
+            command__pb2.GetStatsRequest.SerializeToString,
+            command__pb2.GetStatsOnlineIpListResponse.FromString,
             options,
             channel_credentials,
             insecure,
